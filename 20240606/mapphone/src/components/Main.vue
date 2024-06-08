@@ -104,7 +104,10 @@
                         </router-link>
                     </div>
                     <div>
-                        <img src="https://img.icons8.com/?size=100&id=fR0OOR9q4nZg&format=png&color=000000" alt="술집">
+                        <router-link to="main/barmap">
+                            <img src="https://img.icons8.com/?size=100&id=fR0OOR9q4nZg&format=png&color=000000"
+                                alt="술집">
+                        </router-link>
                     </div>
                 </div>
                 <div class="two">

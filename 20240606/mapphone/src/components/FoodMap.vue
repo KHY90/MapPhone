@@ -23,10 +23,13 @@
                     </div>
                 </div>
             </header>
+
+            <!-- 지도 부분 -->
             <div class="totalbody">
-                지도
-                
+                <div id="map" class="map"></div>
             </div>
+
+            <!-- 풋터 -->
             <footer>
                 <nav class="botom">
                     <div class="Bookmark">
@@ -153,6 +156,13 @@ body {
     align-items: center;
     flex-grow: 1;
     padding: 10px;
+    height: 900px;
+}
+
+.map {
+    width: 100%;
+    height: 400px;
+
 }
 
 .one,
@@ -190,7 +200,49 @@ footer {
 }
 </style>
 
-<script setup>
+<script>
+export default {
+    name: 'MapComponent',
+    data() {
+        return {};
+    },
+    mounted() {
+        if (window.kakao && window.kakao.maps) {
+            this.initMap();
+        } else {
+            const script = document.createElement('script');
+            /* global kakao */
+            script.onload = () => kakao.maps.load(this.initMap);
+            script.src =
+                'http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9f647a199751b8c18f579fff34313544';
+            document.head.appendChild(script);
+        }
+    },
+    methods: {
+        initMap() {
+            var mapContainer = document.getElementById('map'); // 지도를 표시할 div
+            var mapOption = {
+                center: new kakao.maps.LatLng(37.564343, 126.947613), // 지도의 중심좌표
+                level: 3 // 지도의 확대 레벨
+            };
+            var map = new kakao.maps.Map(mapContainer, mapOption);
 
+            var positions = [
+                {
+                    latlng: new kakao.maps.LatLng(37.562632898194835, 126.9454282268269)
+                },
+                {
+                    latlng: new kakao.maps.LatLng(37.56195884514403, 126.94922601468826)
+                }
+            ];
 
+            positions.forEach(function (pos) {
+                var marker = new kakao.maps.Marker({
+                    position: pos.latlng // 마커의 위치
+                });
+                marker.setMap(map);
+            });
+        }
+    }
+};
 </script>

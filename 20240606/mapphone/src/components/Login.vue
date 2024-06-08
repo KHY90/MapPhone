@@ -311,4 +311,28 @@ form .btn input[type="submit"] {
     font-weight: 500;
     cursor: pointer;
 }
+
+.login {
+    display: flex;
+    align-items: center;
+    
+}
+
+.login a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: #ffffff;
+    color: #ff007f;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    
+}
+
+.login a:hover {
+    background-color: #ff007f;
+    color: #ffffff;
+}
+
 </style>

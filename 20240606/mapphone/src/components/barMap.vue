@@ -94,7 +94,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 /* 전체 */
 html,
@@ -204,11 +203,13 @@ body {
     align-items: center;
     flex-grow: 1;
     padding: 10px;
+    height: 900px;
 }
 
 .map {
     width: 100%;
     height: 400px;
+
 }
 
 .one,
@@ -227,6 +228,15 @@ body {
     object-fit: cover;
     margin: 15px 20px 15px 20px;
     padding: 15px 10px 15px 10px;
+}
+
+/* 맵 부분 */
+
+.map {
+    width: 100%;
+    height: 50%;
+    object-fit: cover;
+    margin-top: 0;
 }
 
 /* 풋터 부분 */
