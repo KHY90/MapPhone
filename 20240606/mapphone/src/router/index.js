@@ -5,6 +5,7 @@ import { ref, onUpdated, getTransitionRawChildren } from 'vue';
 import Main from '../components/Main.vue'
 import Login from '../components/Login.vue'
 import FoodMap from '../components/FoodMap.vue'
+import barmap from '../components/barMap.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,6 +24,11 @@ const router = createRouter({
       path: "/main/foodmap",
       name: "foodmap",
       component : FoodMap
+    },
+    {
+      path: "/main/barmap",
+      name: "barmap",
+      component : barmap
     }
     // {
     //   // path : 라우트를 호출할 경로를 나타내는 것으로 path에 해당하는 컴포넌트를 routerView로 렌더링한다.

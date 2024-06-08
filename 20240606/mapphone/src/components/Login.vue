@@ -1,38 +1,37 @@
 <template>
-    <div class="wrapper">
-        <div class="title-text">
-            <div class="title login">LOGIN</div>
-            <div class="title signup">SIGNUP</div>
-        </div>
-        <div class="form-container">
-            <div class="slide-controls">
-                <input type="radio" name="slide" id="login" checked>
-                <input type="radio" name="slide" id="signup">
-                <label for="login" class="slide login">LOGIN</label>
-                <label for="signup" class="slide signup">SIGNUP</label>
-                <div class="slider-tab"></div>
+    <div class="container">
+        <div class="wrapper">
+            <div class="title-text">
+                <div class="title login">LOGIN</div>
+                <div class="title signup">SIGNUP</div>
             </div>
-            <div class="form-inner">
-                <form @submit.prevent="login">
-                    <div class="field">
-                        <input type="text" placeholder="ID" v-model="userId" required>
-                    </div>
-                    <div class="field">
-                        <input type="password" placeholder="Password" v-model="password" required>
-                    </div>
-                    <div class="pass-link">
-                        <a href="#">Forgot password?</a>
-                    </div>
-                    <div class="field btn">
-                        <div class="btn-layer"></div>
-                        <RouterLink to="/main">
-                            <input type="submit" value="Login">
-                        </RouterLink>
-                    </div>
-                    <div class="signup-link">
-                        Not a member? <a @click.prevent="switchToSignup">Signup now</a>
-                    </div>
-                </form>
+            <div class="form-container">
+                <div class="slide-controls">
+                    <input type="radio" name="slide" id="login" checked>
+                    <input type="radio" name="slide" id="signup">
+                    <label for="login" class="slide login">LOGIN</label>
+                    <label for="signup" class="slide signup">SIGNUP</label>
+                    <div class="slider-tab"></div>
+                </div>
+                <div class="form-inner">
+                    <form @submit.prevent="login">
+                        <div class="field">
+                            <input type="text" placeholder="ID" v-model="userId" required>
+                        </div>
+                        <div class="field">
+                            <input type="password" placeholder="Password" v-model="password" required>
+                        </div>
+                        <div class="pass-link">
+                            <a href="#">Forgot password?</a>
+                        </div>
+                        <div class="field btn">
+                            <div class="btn-layer"></div>
+                            <RouterLink to="/main">
+                                <input type="submit" value="Login">
+                            </RouterLink>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -68,9 +67,17 @@ export default {
     font-style: normal;
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
 
 html,
 body {
+    justify-content: center;
     display: grid;
     height: 100%;
     width: 100%;
@@ -104,7 +111,7 @@ body {
 }
 
 .wrapper {
-    border : 1px solid black;
+    border: 1px solid black;
     overflow: hidden;
     max-width: 450px;
     background: #fff;
