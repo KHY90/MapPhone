@@ -98,7 +98,10 @@
             <div class="totalbody">
                 <div class="one">
                     <div>
-                        <img src="https://img.icons8.com/?size=100&id=aeLEOHJU5cpb&format=png&color=000000" alt="식당">
+                        <router-link to="main/foodmap">
+                            <img src="https://img.icons8.com/?size=100&id=aeLEOHJU5cpb&format=png&color=000000"
+                                alt="식당">
+                        </router-link>
                     </div>
                     <div>
                         <img src="https://img.icons8.com/?size=100&id=fR0OOR9q4nZg&format=png&color=000000" alt="술집">
@@ -127,10 +130,10 @@
                         <a href="">즐겨찾기</a>
                     </div>
                     <div class="home">
-                        <a href="">홈</a>
+                        <RouterLink to="/main">홈</RouterLink>
                     </div>
                     <div class="logout">
-                        <a href="">로그아웃</a>
+                        <RouterLink to="/">로그아웃</RouterLink>
                     </div>
                 </nav>
             </footer>
@@ -338,7 +341,8 @@ footer {
 
 <style scoped>
 /* 전체 */
-html, body {
+html,
+body {
     height: 100%;
     margin: 0;
     display: flex;
@@ -378,7 +382,8 @@ html, body {
     justify-content: space-around;
 }
 
-.first, .second {
+.first,
+.second {
     display: flex;
     justify-content: space-between;
     padding: 0 10px;
@@ -390,7 +395,8 @@ html, body {
     padding: 0 10px;
 }
 
-.logo img, .gps img {
+.logo img,
+.gps img {
     width: 30px;
     height: 30px;
     object-fit: cover;
@@ -415,7 +421,7 @@ html, body {
     border-radius: 10px;
     padding: 3px 50px;
     height: 20px;
-    width : 100%;
+    width: 100%;
 }
 
 .serch .button {
@@ -444,18 +450,22 @@ html, body {
     padding: 10px;
 }
 
-.one, .two, .three {
+.one,
+.two,
+.three {
     display: flex;
     justify-content: space-around;
     margin: 10px 0;
 }
 
-.one img, .two img, .three img {
+.one img,
+.two img,
+.three img {
     width: 150px;
     height: 150px;
     object-fit: cover;
-    margin : 15px 20px 15px 20px;
-    padding : 15px 10px 15px 10px;
+    margin: 15px 20px 15px 20px;
+    padding: 15px 10px 15px 10px;
 }
 
 /* 풋터 부분 */
@@ -476,5 +486,6 @@ footer {
 </style>
 
 <script>
+
 
 </script>
