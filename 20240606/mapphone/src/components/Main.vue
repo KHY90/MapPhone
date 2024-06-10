@@ -451,7 +451,9 @@ body {
     align-items: center;
     flex-grow: 1;
     padding: 10px;
+    height: 900px;
 }
+
 
 .one,
 .two,
