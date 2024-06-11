@@ -1,7 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { ref, onUpdated } from 'vue';
-
+// import { ref, onUpdated } from 'vue';
 
 </script>
 
@@ -12,7 +11,8 @@ import { ref, onUpdated } from 'vue';
     <RouterLink to="/main"></RouterLink>
     <RouterLink to="/map"></RouterLink>
   </main> -->
- <RouterView />
+
+  <RouterView />
 </template>
 
 <style scoped></style>

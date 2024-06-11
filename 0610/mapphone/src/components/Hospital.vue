@@ -35,7 +35,7 @@
                             </div>
                             <div class="bookcall">
                                 <div>
-                                    <button class="booking" @click="addToFavorites(selectedPlace)">
+                                    <button class="booking" @click="showAlert">
                                         <img src="https://icons.iconarchive.com/icons/github/octicons/48/bookmark-24-icon.png"
                                             alt="북마크">
                                     </button>
@@ -100,7 +100,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'; // Vue에서 ref와 onMounted 함수를 가져옵니다.
 import "../css/style.css";
-import store from '../store';
 
 // 검색어를 저장할 변수
 const keyword = ref('');
@@ -132,7 +131,7 @@ onMounted(() => {
 // 카카오 맵 스크립트를 로드하는 함수
 const loadKakaoMapScript = () => {
     const script = document.createElement('script'); // 새로운 스크립트 태그 생성
-    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9f647a199751b8c18f579fff34313544&libraries=services'; // 카카오 맵 스크립트 URL 설정
+    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=0d81efa0ecfe59e238c0907b1af9c6d7&libraries=services'; // 카카오 맵 스크립트 URL 설정
     script.onload = () => { // 스크립트가 로드되면 실행될 함수
         kakao.maps.load(() => { // 카카오 맵이 로드되면 실행될 함수
             initializeKakaoMap();
@@ -229,43 +228,8 @@ let markers = [];
 
 const showAlert = () => {
     alert("즐겨찾기가 등록되었습니다.");
-    addToFavorites(selectedPlace.value);
 };
 
-const placeData = ref({
-    place_name: '',
-    address_name: '',
-    phone: ''
-});
-
-// 마커 클릭 시 해당 장소 정보를 팝업에 표시하는 함수
-const showPlaceInfo = (place) => {
-    placeData.value = {
-        place_name: place.place_name,
-        address_name: place.address_name,
-        phone: place.phone
-    };
-    togglePopup(); // 팝업 창 열기
-};
-
-// JSON 형식으로 즐겨찾기에 추가된 장소 정보를 저장할 변수
-const favoritePlacesData = ref([]);
-
-// 즐겨찾기 버튼을 클릭했을 때 실행될 함수
-const addToFavorites = (place) => {
-    store.addToFavorites(place); // 전역 상태에 추가
-    togglePopup(); // 팝업 창 닫기
-};
-
-// 즐겨찾기 페이지로 이동하는 함수
-const gotoFavoritesPage = () => {
-    // Vue Router를 사용하여 즐겨찾기 페이지로 이동
-};
-
-// 즐겨찾기 목록에서 장소를 제거하는 함수
-const removeFromFavorites = (index) => {
-    store.removeFromFavorites(index); // 전역 상태에서 제거
-};
 
 </script>
 
