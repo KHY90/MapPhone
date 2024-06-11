@@ -6,16 +6,13 @@
           <div class="logo">
           </div>
           <div class="gps">
-            <div>위치</div>
+            <div class="gpslocation">{{ location }}</div> <!-- 위치 표시 -->
             <div>
               <img src="https://img.icons8.com/?size=100&id=3723&format=png&color=000000" alt="gps">
             </div>
           </div>
         </div>
         <div class="second">
-          <div>
-            <img src="https://img.icons8.com/?size=100&id=63207&format=png&color=000000" alt="corectgps">
-          </div>
           <div class="search">
             <input type="text" placeholder="위치를 입력하세요" v-model="keyword">
             <button class="button" @click="search">검색</button>
@@ -44,13 +41,19 @@
       <footer>
         <nav class="bottom">
           <div class="bookmark" @click="togglePopup">
-            <a href="#">즐겨찾기</a>
+            <a href="#">
+              <img src="https://img.icons8.com/ios/50/000000/bookmark-ribbon--v1.png" alt="즐겨찾기" style="width: 35px; height: 35px;">
+            </a>
           </div>
           <div class="home">
-            <RouterLink to="/main">홈</RouterLink>
+            <RouterLink to="/main">
+              <img src="https://img.icons8.com/ios/50/000000/home-page.png" alt="홈">
+            </RouterLink>
           </div>
           <div class="logout">
-            <RouterLink to="/">로그아웃</RouterLink>
+            <RouterLink to="/">
+              <img src="https://img.icons8.com/ios/50/000000/logout-rounded-left.png" alt="로그아웃">
+            </RouterLink>
           </div>
         </nav>
       </footer>
@@ -102,7 +105,7 @@ const removeFromFavorites = (index) => {
   background-color: #fff;
   border: 1px solid #000000;
   border-radius: 5px;
-  width : 100%;
+  width: 100%;
 }
 
 .favorite-info {

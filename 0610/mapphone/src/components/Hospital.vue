@@ -4,19 +4,15 @@
             <header class="navigation">
                 <div class="first">
                     <div class="logo">
-                        <!-- <img src="https://img.icons8.com/?size=100&id=pSoAxHFPLpWF&format=png&color=000000" alt="logo"> -->
                     </div>
                     <div class="gps">
-                        <div>위치</div>
+                        <div class="gpslocation">{{ location }}</div> <!-- 위치 표시 -->
                         <div>
                             <img src="https://img.icons8.com/?size=100&id=3723&format=png&color=000000" alt="gps">
                         </div>
                     </div>
                 </div>
                 <div class="second">
-                    <div>
-                        <img src="https://img.icons8.com/?size=100&id=63207&format=png&color=000000" alt="corectgps">
-                    </div>
                     <div class="search">
                         <input type="text" placeholder="위치를 입력하세요" v-model="keyword">
                         <button class="button" @click="search">검색</button>
@@ -35,7 +31,7 @@
                             </div>
                             <div class="bookcall">
                                 <div>
-                                    <button class="booking" @click="showAlert">
+                                    <button class="booking" @click="addToFavorites(selectedPlace)">
                                         <img src="https://icons.iconarchive.com/icons/github/octicons/48/bookmark-24-icon.png"
                                             alt="북마크">
                                     </button>
@@ -59,13 +55,19 @@
             <footer>
                 <nav class="bottom">
                     <div class="bookmark" @click="togglePopup">
-                        <a href="#">즐겨찾기</a>
-                    </div>
+                      <a href="#">
+                        <img src="https://img.icons8.com/ios/50/000000/bookmark-ribbon--v1.png" alt="즐겨찾기" style="width: 35px; height: 35px;">
+                      </a>
+                  </div>
                     <div class="home">
-                        <RouterLink to="/main">홈</RouterLink>
+                        <RouterLink to="/main">
+                            <img src="https://img.icons8.com/ios/50/000000/home-page.png" alt="홈">
+                        </RouterLink>
                     </div>
                     <div class="logout">
-                        <RouterLink to="/">로그아웃</RouterLink>
+                        <RouterLink to="/">
+                            <img src="https://img.icons8.com/ios/50/000000/logout-rounded-left.png" alt="로그아웃">
+                        </RouterLink>
                     </div>
                 </nav>
             </footer>
@@ -100,7 +102,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'; // Vue에서 ref와 onMounted 함수를 가져옵니다.
 import "../css/style.css";
+import store from '../store';
 
+const location = ref(''); // 위치를 표시할 변수
 // 검색어를 저장할 변수
 const keyword = ref('');
 // 장소 목록을 저장할 변수
@@ -128,10 +132,15 @@ onMounted(() => {
     loadKakaoMapScript();
 });
 
+const search = () => {
+    location.value = keyword.value; // 검색어를 위치에 반영
+    // 이후에 검색 결과를 처리하는 코드를 추가할 수 있습니다.
+};
+
 // 카카오 맵 스크립트를 로드하는 함수
 const loadKakaoMapScript = () => {
     const script = document.createElement('script'); // 새로운 스크립트 태그 생성
-    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=0d81efa0ecfe59e238c0907b1af9c6d7&libraries=services'; // 카카오 맵 스크립트 URL 설정
+    script.src = 'https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=9f647a199751b8c18f579fff34313544&libraries=services'; // 카카오 맵 스크립트 URL 설정
     script.onload = () => { // 스크립트가 로드되면 실행될 함수
         kakao.maps.load(() => { // 카카오 맵이 로드되면 실행될 함수
             initializeKakaoMap();
@@ -162,7 +171,7 @@ const initializeKakaoMap = () => {
 // 장소를 검색하는 함수
 const searchPlaces = () => {
     if (!ps.value) return; // 장소 검색 서비스가 초기화되지 않았으면 함수 종료
-    ps.value.categorySearch('HP8', placesSearchCB, { useMapBounds: true }); // 카테고리 코드 'FD6'을 사용해 장소 검색
+    ps.value.categorySearch('BK9', placesSearchCB, { useMapBounds: true }); // 카테고리 코드 'FD6'을 사용해 장소 검색
 };
 
 // 장소 검색 콜백 함수
@@ -204,7 +213,7 @@ const handleMapDragEnd = () => {
     const swLatLng = bounds.getSouthWest(); // 남서쪽 좌표
     const neLatLng = bounds.getNorthEast(); // 북동쪽 좌표
 
-    ps.value.categorySearch('HP8', (data, status) => {
+    ps.value.categorySearch('BK9', (data, status) => {
         if (status === kakao.maps.services.Status.OK) { // 검색이 성공했을 때
             displayPlaces(data); // 검색 결과를 지도에 표시
         } else {
@@ -228,8 +237,43 @@ let markers = [];
 
 const showAlert = () => {
     alert("즐겨찾기가 등록되었습니다.");
+    addToFavorites(selectedPlace.value);
 };
 
+const placeData = ref({
+    place_name: '',
+    address_name: '',
+    phone: ''
+});
+
+// 마커 클릭 시 해당 장소 정보를 팝업에 표시하는 함수
+const showPlaceInfo = (place) => {
+    placeData.value = {
+        place_name: place.place_name,
+        address_name: place.address_name,
+        phone: place.phone
+    };
+    togglePopup(); // 팝업 창 열기
+};
+
+// JSON 형식으로 즐겨찾기에 추가된 장소 정보를 저장할 변수
+const favoritePlacesData = ref([]);
+
+// 즐겨찾기 버튼을 클릭했을 때 실행될 함수
+const addToFavorites = (place) => {
+    store.addToFavorites(place); // 전역 상태에 추가
+    togglePopup(); // 팝업 창 닫기
+};
+
+// 즐겨찾기 페이지로 이동하는 함수
+const gotoFavoritesPage = () => {
+    // Vue Router를 사용하여 즐겨찾기 페이지로 이동
+};
+
+// 즐겨찾기 목록에서 장소를 제거하는 함수
+const removeFromFavorites = (index) => {
+    store.removeFromFavorites(index); // 전역 상태에서 제거
+};
 
 </script>
 

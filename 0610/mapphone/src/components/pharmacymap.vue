@@ -4,19 +4,15 @@
             <header class="navigation">
                 <div class="first">
                     <div class="logo">
-                        <!-- <img src="https://img.icons8.com/?size=100&id=pSoAxHFPLpWF&format=png&color=000000" alt="logo"> -->
                     </div>
                     <div class="gps">
-                        <div>위치</div>
+                        <div class="gpslocation">{{ location }}</div> <!-- 위치 표시 -->
                         <div>
                             <img src="https://img.icons8.com/?size=100&id=3723&format=png&color=000000" alt="gps">
                         </div>
                     </div>
                 </div>
                 <div class="second">
-                    <div>
-                        <img src="https://img.icons8.com/?size=100&id=63207&format=png&color=000000" alt="corectgps">
-                    </div>
                     <div class="search">
                         <input type="text" placeholder="위치를 입력하세요" v-model="keyword">
                         <button class="button" @click="search">검색</button>
@@ -59,13 +55,19 @@
             <footer>
                 <nav class="bottom">
                     <div class="bookmark" @click="togglePopup">
-                        <a href="#">즐겨찾기</a>
-                    </div>
+                      <a href="#" class="footer-icon">
+                        <img src="https://img.icons8.com/ios/50/000000/bookmark-ribbon--v1.png" alt="즐겨찾기" style="width: 30px; height: 35px;">
+                      </a>
+                  </div>
                     <div class="home">
-                        <RouterLink to="/main">홈</RouterLink>
+                        <RouterLink to="/main">
+                            <img src="https://img.icons8.com/ios/50/000000/home-page.png" alt="홈">
+                        </RouterLink>
                     </div>
                     <div class="logout">
-                        <RouterLink to="/">로그아웃</RouterLink>
+                        <RouterLink to="/">
+                            <img src="https://img.icons8.com/ios/50/000000/logout-rounded-left.png" alt="로그아웃">
+                        </RouterLink>
                     </div>
                 </nav>
             </footer>
@@ -102,6 +104,7 @@ import { ref, onMounted } from 'vue'; // Vue에서 ref와 onMounted 함수를 �
 import "../css/style.css";
 import store from '../store';
 
+const location = ref(''); // 위치를 표시할 변수
 // 검색어를 저장할 변수
 const keyword = ref('');
 // 장소 목록을 저장할 변수
@@ -128,6 +131,11 @@ const togglePopup = () => {
 onMounted(() => {
     loadKakaoMapScript();
 });
+
+const search = () => {
+    location.value = keyword.value; // 검색어를 위치에 반영
+    // 이후에 검색 결과를 처리하는 코드를 추가할 수 있습니다.
+};
 
 // 카카오 맵 스크립트를 로드하는 함수
 const loadKakaoMapScript = () => {
@@ -163,7 +171,7 @@ const initializeKakaoMap = () => {
 // 장소를 검색하는 함수
 const searchPlaces = () => {
     if (!ps.value) return; // 장소 검색 서비스가 초기화되지 않았으면 함수 종료
-    ps.value.categorySearch('PM9', placesSearchCB, { useMapBounds: true }); // 카테고리 코드 'FD6'을 사용해 장소 검색
+    ps.value.categorySearch('BK9', placesSearchCB, { useMapBounds: true }); // 카테고리 코드 'FD6'을 사용해 장소 검색
 };
 
 // 장소 검색 콜백 함수
@@ -205,7 +213,7 @@ const handleMapDragEnd = () => {
     const swLatLng = bounds.getSouthWest(); // 남서쪽 좌표
     const neLatLng = bounds.getNorthEast(); // 북동쪽 좌표
 
-    ps.value.categorySearch('PM9', (data, status) => {
+    ps.value.categorySearch('BK9', (data, status) => {
         if (status === kakao.maps.services.Status.OK) { // 검색이 성공했을 때
             displayPlaces(data); // 검색 결과를 지도에 표시
         } else {

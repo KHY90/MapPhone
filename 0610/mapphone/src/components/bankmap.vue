@@ -4,19 +4,15 @@
             <header class="navigation">
                 <div class="first">
                     <div class="logo">
-                        <!-- <img src="https://img.icons8.com/?size=100&id=pSoAxHFPLpWF&format=png&color=000000" alt="logo"> -->
                     </div>
                     <div class="gps">
-                        <div>위치</div>
+                        <div class="gpslocation">{{ location }}</div> <!-- 위치 표시 -->
                         <div>
                             <img src="https://img.icons8.com/?size=100&id=3723&format=png&color=000000" alt="gps">
                         </div>
                     </div>
                 </div>
                 <div class="second">
-                    <div>
-                        <img src="https://img.icons8.com/?size=100&id=63207&format=png&color=000000" alt="corectgps">
-                    </div>
                     <div class="search">
                         <input type="text" placeholder="위치를 입력하세요" v-model="keyword">
                         <button class="button" @click="search">검색</button>
@@ -35,12 +31,12 @@
                             </div>
                             <div class="bookcall">
                                 <div>
-                                    <button class="booking" @click="addToFavorites(selectedPlace)">
+                                    <button class="booking" @click="addToFavorites(selectedPlace)" alert="즐겨찾기가 등록되었습니다.">
                                         <img src="https://icons.iconarchive.com/icons/github/octicons/48/bookmark-24-icon.png"
                                             alt="북마크">
                                     </button>
                                 </div>
-                                <div class="call" @click="togglePopup2">
+                                <div class="call" @click="togglePopup">
                                     <button>
                                         <img src="https://icons.iconarchive.com/icons/iynque/ios7-style/48/Phone-icon.png"
                                             alt="전화">
@@ -59,13 +55,19 @@
             <footer>
                 <nav class="bottom">
                     <div class="bookmark" @click="togglePopup">
-                        <a href="#">즐겨찾기</a>
-                    </div>
+                      <a href="#">
+                        <img src="https://img.icons8.com/ios/50/000000/bookmark-ribbon--v1.png" alt="즐겨찾기" style="width: 35px; height: 35px;">
+                      </a>
+                  </div>
                     <div class="home">
-                        <RouterLink to="/main">홈</RouterLink>
+                        <RouterLink to="/main">
+                            <img src="https://img.icons8.com/ios/50/000000/home-page.png" alt="홈">
+                        </RouterLink>
                     </div>
                     <div class="logout">
-                        <RouterLink to="/">로그아웃</RouterLink>
+                        <RouterLink to="/">
+                            <img src="https://img.icons8.com/ios/50/000000/logout-rounded-left.png" alt="로그아웃">
+                        </RouterLink>
                     </div>
                 </nav>
             </footer>
@@ -85,14 +87,6 @@
                 </div>
             </div>
             <!-- 전화연결 -->
-            <!-- <div v-if="showPopup" class="popup2">
-              <div class="popup-content">
-                  <span class="close" @click="togglePopup2">&times;</span>
-                  <div class="number">
-                      <p>{{ selectedPlace.phone }}</p>
-                  </div>
-              </div>
-          </div> -->
         </div>
     </div>
 </template>
@@ -102,6 +96,7 @@ import { ref, onMounted } from 'vue'; // Vue에서 ref와 onMounted 함수를 �
 import "../css/style.css";
 import store from '../store';
 
+const location = ref(''); // 위치를 표시할 변수
 // 검색어를 저장할 변수
 const keyword = ref('');
 // 장소 목록을 저장할 변수
@@ -128,6 +123,19 @@ const togglePopup = () => {
 onMounted(() => {
     loadKakaoMapScript();
 });
+
+// 전화번호를 보여주는 함수
+const showPhoneNumber = () => {
+    if (selectedPlace.value) {
+        return selectedPlace.value.phone;
+    }
+    return '';
+};
+
+const search = () => {
+    location.value = keyword.value; // 검색어를 위치에 반영
+    // 이후에 검색 결과를 처리하는 코드를 추가할 수 있습니다.
+};
 
 // 카카오 맵 스크립트를 로드하는 함수
 const loadKakaoMapScript = () => {
