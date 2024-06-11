@@ -76,11 +76,11 @@ body {
     padding: 0 10px;
 }
 
-.logo img {
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
+.logo {
     display: flex;
+    color: white;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    margin-left: 10px;
 }
 
 .second img {
@@ -205,16 +205,21 @@ body {
 
 .placeinfo .title {
     display: flex;
+    align-items: center;
     justify-content: space-around;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 20px;
     border-radius: 6px 6px 6px 6px;
     margin: -1px -1px 0 -1px;
-    width: 100%;
+    width: 95%;
     padding: 8px;
     color: #fff;
     background: #d95050;
     /* background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center; */
+}
+
+.placeinfo .innerinfo {
+    margin-top: 10px;
 }
 
 .placeinfo .number {
@@ -276,6 +281,15 @@ footer {
     /* 팝업 창이 다른 요소들 위에 나타나도록 z-index 값을 적절히 조절해주세요 */
 }
 
+.popup p {
+    font-size: 15px;
+}
+
+.popup .poptitle {
+    font-style: bold;
+    font-size: 30px;
+}
+
 .popup-content {
     background: white;
     padding: 10px;
@@ -283,6 +297,8 @@ footer {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
     z-index: 11;
+    height: 100%;
+    width: 100%;
     /* 팝업 내용이 팝업 창보다 위에 나타나도록 설정합니다. */
 }
 
@@ -306,21 +322,25 @@ footer {
     border: 1px solid #ccc;
     padding: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 60%;
-    height: 60%;
+    width: 60%; /* 팝업 창 너비 조정 */
     text-align: center;
 }
 
-.popup-content .close {
+.popup-content2 .close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: -5px;
+    right: 5px;
     cursor: pointer;
     font-size: 20px;
 }
 
+.popup-content2 p {
+    font-size: 40px; /* 전화번호 크기 조정 */
+    margin-bottom: 20px; /* 하단 여백 추가 */
+}
+
 .keypad {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .keypad-row {
@@ -329,10 +349,16 @@ footer {
     margin-bottom: 10px;
 }
 
+.keypad-row img {
+    width: 50px;
+    height: 50px;
+    display: flex;
+}
+
 .keypad button {
-    width: 40px;
-    height: 40px;
-    font-size: 16px;
+    width: 50px; /* 버튼 크기 조정 */
+    height: 40px; /* 버튼 크기 조정 */
+    font-size: 18px; /* 버튼 글씨 크기 조정 */
     cursor: pointer;
     border: 1px solid #ccc;
     background-color: #f9f9f9;
@@ -343,3 +369,58 @@ footer {
     background-color: #e0e0e0;
 }
 
+/* 전화버튼 */
+.buttoneffect {
+    display: inline-block;
+    border-radius: 10px; /* 둥근 모서리 */
+    overflow: hidden; /* 자식 요소가 부모의 경계를 넘지 않도록 설정 */
+    transition: transform 0.2s, box-shadow 0.2s; /* 애니메이션 효과 */
+    cursor: pointer; /* 커서를 포인터로 변경 */
+    width: 50px; /* 버튼 크기 조정 */
+    height: 50px; /* 버튼 크기 조정 */
+}
+
+.buttoneffect img {
+    display: block;
+    width: 100%; /* 이미지가 부모 요소의 너비에 맞도록 설정 */
+    height: auto; /* 이미지 높이를 자동으로 설정 */
+}
+
+.buttoneffect:hover {
+    transform: scale(1.05); /* 버튼 확대 효과 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+}
+
+.buttoneffect:active {
+    transform: scale(0.95); /* 버튼 클릭 효과 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 클릭 시 그림자 효과 */
+}
+
+/* 번호 지우기 버튼 */
+
+.buttoneffect1 {
+    display: inline-block;
+    border-radius: 10px; /* 둥근 모서리 */
+    border: 1px solid rgb(150, 149, 149);
+    overflow: hidden; /* 자식 요소가 부모의 경계를 넘지 않도록 설정 */
+    transition: transform 0.2s, box-shadow 0.2s; /* 애니메이션 효과 */
+    cursor: pointer; /* 커서를 포인터로 변경 */
+    width: 25px; /* 버튼 크기 조정 */
+    height: 25px; /* 버튼 크기 조정 */
+}
+
+.buttoneffect1 img {
+    display: block;
+    width: 100%; /* 이미지가 부모 요소의 너비에 맞도록 설정 */
+    height: auto; /* 이미지 높이를 자동으로 설정 */
+}
+
+.buttoneffect1:hover {
+    transform: scale(1.05); /* 버튼 확대 효과 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+}
+
+.buttoneffect1:active {
+    transform: scale(0.95); /* 버튼 클릭 효과 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* 클릭 시 그림자 효과 */
+}
