@@ -4,10 +4,9 @@
             <header class="navigation">
                 <div class="first">
                     <div class="logo">
-                        <!-- <img src="https://img.icons8.com/?size=100&id=pSoAxHFPLpWF&format=png&color=000000" alt="logo"> -->
                     </div>
                     <div class="gps">
-                        <div>위치</div>
+                        <div>{{ location }}</div> <!-- 위치 표시 -->
                         <div>
                             <img src="https://img.icons8.com/?size=100&id=3723&format=png&color=000000" alt="gps">
                         </div>
@@ -17,58 +16,71 @@
                     <div>
                         <img src="https://img.icons8.com/?size=100&id=63207&format=png&color=000000" alt="corectgps">
                     </div>
-                    <div class="serch">
-                        <input type="text" placeholder="위치를 입력하세요">
-                        <button class="button">검 색</button>
+                    <div class="search">
+                        <input type="text" placeholder="위치를 입력하세요" v-model="inputLocation"> <!-- 입력창 -->
+                        <button class="button" @click="updateLocation">검색</button> <!-- 버튼 클릭 이벤트 -->
                     </div>
                 </div>
             </header>
+
             <div class="totalbody">
                 <div class="one">
                     <div class="menu-item">
                         <router-link to="main/foodmap">
                             <img src="https://img.icons8.com/?size=100&id=koNbh1XwujSO&format=png&color=000000"
                                 alt="식당">
-                                <div class ="menu">식당</div>
+                            <div class="menu">식당</div>
                         </router-link>
                     </div>
                     <div class="menu-item">
                         <router-link to="main/bankmap">
-                        <img src="https://img.icons8.com/?size=100&id=zJRQAXUs76EX&format=png&color=000000" alt="은행">
-                        <div class ="menu">은행</div>
-                    </router-link>
-                  
+                            <img src="https://img.icons8.com/?size=100&id=zJRQAXUs76EX&format=png&color=000000"
+                                alt="은행">
+                            <div class="menu">은행</div>
+                        </router-link>
+
                     </div>
                 </div>
                 <div class="two">
                     <div class="menu-item">
-                        <img src="https://img.icons8.com/?size=100&id=nOcivOyW0Qr9&format=png&color=000000" alt="카페">
-                        <div class ="menu">카페</div>
+                        <router-link to="main/cafemap">
+                            <img src="https://img.icons8.com/?size=100&id=nOcivOyW0Qr9&format=png&color=000000"
+                                alt="카페">
+                            <div class="menu">카페</div>
+                        </router-link>
                     </div>
                     <div class="menu-item">
-                        <img src="https://img.icons8.com/?size=100&id=2ndaoUiYY2z4&format=png&color=000000" alt="호텔">
-                        <div class ="menu">호텔</div>
+                        <router-link to="main/hotelmap">
+                            <img src="https://img.icons8.com/?size=100&id=2ndaoUiYY2z4&format=png&color=000000"
+                                alt="호텔">
+                            <div class="menu">호텔</div>
+                        </router-link>
                     </div>
                 </div>
                 <div class="three">
                     <div class="menu-item">
                         <router-link to="main/hospitalmap">
-                        <img src="https://img.icons8.com/?size=100&id=qObz5FFrXebr&format=png&color=000000" alt="병원">
-                        <div class ="menu">병원</div>
-                    </router-link>
+                            <img src="https://img.icons8.com/?size=100&id=qObz5FFrXebr&format=png&color=000000"
+                                alt="병원">
+                            <div class="menu">병원</div>
+                        </router-link>
                     </div>
                     <div class="menu-item">
-                        <img src="https://img.icons8.com/?size=100&id=cq3pqXaneXhq&format=png&color=000000" alt="약국">
-                        <div class ="menu">약국</div>
+                        <router-link to="main/pharmacymap">
+                            <img src="https://img.icons8.com/?size=100&id=cq3pqXaneXhq&format=png&color=000000"
+                                alt="약국">
+                            <div class="menu">약국</div>
+                        </router-link>
                     </div>
                 </div>
             </div>
             <footer>
                 <nav class="botom">
                     <div class="Bookmark">
-                        <a href="">
+                        <router-link to="main/favorites">
                             <img src="https://img.icons8.com/ios/50/000000/bookmark-ribbon--v1.png" alt="즐겨찾기">
-                        </a>
+                        </router-link>
+
                     </div>
                     <div class="home">
                         <RouterLink to="/main">
@@ -86,11 +98,17 @@
     </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
 
 <script>
+import { ref } from 'vue';
 import "../css/mainstyle.css";
+
+const inputLocation = ref(''); // 입력값을 저장할 ref
+const location = ref(''); // 위치를 저장할 ref
+
+const updateLocation = () => {
+  location.value = inputLocation.value; // 입력값을 위치에 업데이트
+};
 
 </script>

@@ -163,7 +163,7 @@ const initializeKakaoMap = () => {
 // 장소를 검색하는 함수
 const searchPlaces = () => {
   if (!ps.value) return; // 장소 검색 서비스가 초기화되지 않았으면 함수 종료
-  ps.value.categorySearch('FD6', placesSearchCB, { useMapBounds: true }); // 카테고리 코드 'FD6'을 사용해 장소 검색
+  ps.value.categorySearch('CE7', placesSearchCB, { useMapBounds: true }); // 카테고리 코드 'FD6'을 사용해 장소 검색
 };
 
 // 장소 검색 콜백 함수
@@ -205,7 +205,7 @@ const handleMapDragEnd = () => {
   const swLatLng = bounds.getSouthWest(); // 남서쪽 좌표
   const neLatLng = bounds.getNorthEast(); // 북동쪽 좌표
 
-  ps.value.categorySearch('FD6', (data, status) => {
+  ps.value.categorySearch('CE7', (data, status) => {
       if (status === kakao.maps.services.Status.OK) { // 검색이 성공했을 때
           displayPlaces(data); // 검색 결과를 지도에 표시
       } else {

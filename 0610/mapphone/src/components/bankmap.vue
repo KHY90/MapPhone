@@ -86,13 +86,13 @@
             </div>
             <!-- 전화연결 -->
             <!-- <div v-if="showPopup" class="popup2">
-                <div class="popup-content">
-                    <span class="close" @click="togglePopup2">&times;</span>
-                    <div class="number">
-                        <p>{{ selectedPlace.phone }}</p>
-                    </div>
-                </div>
-            </div> -->
+              <div class="popup-content">
+                  <span class="close" @click="togglePopup2">&times;</span>
+                  <div class="number">
+                      <p>{{ selectedPlace.phone }}</p>
+                  </div>
+              </div>
+          </div> -->
         </div>
     </div>
 </template>
@@ -163,7 +163,7 @@ const initializeKakaoMap = () => {
 // 장소를 검색하는 함수
 const searchPlaces = () => {
     if (!ps.value) return; // 장소 검색 서비스가 초기화되지 않았으면 함수 종료
-    ps.value.categorySearch('HP8', placesSearchCB, { useMapBounds: true }); // 카테고리 코드 'FD6'을 사용해 장소 검색
+    ps.value.categorySearch('BK9', placesSearchCB, { useMapBounds: true }); // 카테고리 코드 'FD6'을 사용해 장소 검색
 };
 
 // 장소 검색 콜백 함수
@@ -205,7 +205,7 @@ const handleMapDragEnd = () => {
     const swLatLng = bounds.getSouthWest(); // 남서쪽 좌표
     const neLatLng = bounds.getNorthEast(); // 북동쪽 좌표
 
-    ps.value.categorySearch('HP8', (data, status) => {
+    ps.value.categorySearch('BK9', (data, status) => {
         if (status === kakao.maps.services.Status.OK) { // 검색이 성공했을 때
             displayPlaces(data); // 검색 결과를 지도에 표시
         } else {
